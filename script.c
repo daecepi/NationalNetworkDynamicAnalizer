@@ -9,10 +9,13 @@ const int N = 125;
 const int K_strength = 3;
 
 //FUNCTION PROTOTYPE'S SECTION
+void printMatrix(int r, int c, double matrix[r][c]);
+void initializeFunction(int r, int c, double K[r][c], double n);
+void transposeMatrix(int r, int c, double matrix[r][c],double trasposed[r][c]);
 double evaluateDegreeToCero(double[N][N]);
 double sumVector(double[N]);
 int main(){
-    double defaultWhite[N][N];
+    /*double defaultWhite[N][N];
     double K[N][N]; // matriz de conectividad
     double degMat[N][N];
 
@@ -99,6 +102,36 @@ int main(){
         degMat[i][i] = sum;
     }
 
+    double lap[N][N]; // % Y el Laplaciano es por definición
+
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            lap[i][j] = degMat[i][j] - A[i][j];
+        }
+    }
+    
+    // 2. Para el pto de equilibrio de las fases calculo primero la
+    // pseudoinversa del laplaciano (por definición el laplaciano no es
+    // invertible, por eso la pseudoinversa). (Pseudo Inversa Moore-Penrose)
+    
+    double transposed[N][N];//Variables que contendrá la traspuesta
+
+    transposeMatrix(N, N, lap, transposed); //Transposición de la matriz
+    */
+
+    //Test section
+    double m[3][3];
+    float m2[3][3] = {1.3,2.0,3.4,4.5,5.6,6.6,7.66,8.6,9.6};
+
+    printf("%f",m2[2][0]);
+
+    printf("dad");
+
+    initializeFunction(3,3, m, 0);
+
+    //printMatrix(3,3,m2);
 
     return 0;
 }
@@ -106,14 +139,43 @@ int main(){
 /*
 Function that initializes the each item
 */
-/*int **initializeFuction(int K[N][N], int n){
-    for(int i = 0; i < N; i++){
-        for (int j = 0; j < N; j++){
-            K[i][j] = n;
+void initializeFunction(int r, int c, double matrix[r][c], double n){
+    for(int i = 0; i < r; i++){
+        for (int j = 0; j < c; j++){
+            matrix[i][j] = n;
         }
     }
-    return K;
-}*/
+}
+
+/*
+* Función encargada de imprimir las matrices
+* */
+void printMatrix(int r, int c, double matrix[r][c]){
+    printf("Matriz:\n");
+    for (int i = 0; i < r; i++)
+    {
+            printf("[");
+            for (int j = 0; j < c; j++)
+            {
+                printf("%f",matrix[i][j]);
+            }
+            printf("]\n");
+    }
+    
+}
+
+/**
+ * Función encargada de trasponer la matriz
+ * */
+void transposeMatrix(int r, int c, double matrix[r][c],double trasposed[r][c]){
+    for (int i = 0; i < r; i++)
+    {
+            for (int j = 0; j < c; j++)
+            {
+                trasposed[j][i] = matrix[i][j];
+            }
+    }
+}
 
 /*
 Function that evals the node's degree on the matrix and returns 1 
